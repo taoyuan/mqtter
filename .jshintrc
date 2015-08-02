@@ -1,0 +1,15 @@
+{
+  "node": true,
+  "esnext": true,
+  "bitwise": false,
+  "eqeqeq": true,
+  "eqnull": true,
+  "immed": true,
+  "latedef": false,
+  "newcap": true,
+  "noarg": true,
+  "undef": true,
+  "strict": true,
+  "scripturl": true,
+  "mocha": true
+}
