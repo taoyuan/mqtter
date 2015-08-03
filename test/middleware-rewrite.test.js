@@ -25,7 +25,7 @@ var moscaSettings = function() {
   };
 };
 
-describe('rewrite/integration', function () {
+describe('middleware/rewrite', function () {
 
   beforeEach(function () {
     this.server = new Server(moscaSettings());

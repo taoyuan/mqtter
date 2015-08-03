@@ -2,13 +2,13 @@
 
 var t = require('chai').assert;
 var pd = require('plando');
-var TopicRewriter = require('../lib/topic-rewriter');
+var Rewriter = require('../lib/topic-rewriter');
 
 describe('topic-rewriter', function () {
 
   it('should rewrite topic correctly for both in and out bound', function (done) {
     var d = pd(2, done);
-    var rewriter = new TopicRewriter([
+    var rewriter = new Rewriter([
       {type: 'in', from: '\$*', to: '\$foo/$1'},
       {type: 'out', from: '\$foo/*', to: '\$$1'}
     ]);

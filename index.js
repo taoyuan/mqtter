@@ -1,4 +1,4 @@
 'use strict';
 
-exports.Server = require('./lib/server');
-exports.TopicRewriter = require('./lib/topic-rewriter');
+exports.server = exports.Server = require('./lib/server');
+exports.rewriter = exports.Rewriter = require('./lib/rewriter');
