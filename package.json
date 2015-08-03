@@ -1,7 +1,7 @@
 {
-  "name": "mqttoxy",
+  "name": "mqtter",
   "version": "0.1.15",
-  "description": "A MQTT Proxy.",
+  "description": "A middleware-able MQTT broker for node.js based on mosca",
   "homepage": "https://github.com/taoyuan/mqttoxy",
   "repository": "taoyuan/mqttoxy",
   "author": {
