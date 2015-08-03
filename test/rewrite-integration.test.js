@@ -1,5 +1,6 @@
 'use strict';
 
+var async = require('async');
 var t = require('chai').assert;
 var pd = require('plando');
 var mqttoxy = require('../');
@@ -15,35 +16,134 @@ var rewriter = new TopicRewriter([
 var in_topic = '$bar/123';
 var out_topic = '$foo/bar/123';
 
-describe('rewrite-integration', function () {
+var moscaSettings = function() {
+  return {
+    port: s.nextPort(),
+    stats: false,
+    publishNewClient: false,
+    publishClientDisconnect: false
+  };
+};
+
+describe('rewrite/integration', function () {
+
+  beforeEach(function () {
+    this.server = new Server(moscaSettings());
+  });
+
+  afterEach(function (done) {
+    var that = this;
+    setImmediate(function () {
+      that.server.close(done);
+    });
+  });
 
   it('should rewrite subscribe topic', function (done) {
     var d = pd(2, done);
 
-    var server = new Server({});
+    var server = this.server;
     // rewrite inbound subscription
     server.use('subscribe:before', rewriter.rewrite('in'));
 
-    server.ascoltatore._subscribe = server.ascoltatore.subscribe;
-    server.ascoltatore.subscribe = function (topic) {
-      if (topic.indexOf('$SYS') < 0) {
-        t.equal(topic, out_topic);
-        d();
-      }
-      server.ascoltatore._subscribe.apply(server.ascoltatore, arguments);
-    };
+    server.on("subscribed", function (topic) {
+      t.equal(topic, out_topic);
+      d();
+    });
 
     s.buildAndConnect(d, server, function (client) {
-      var messageId = Math.floor(65535 * Math.random());
-
-      client.on("suback", function() {
-        client.disconnect();
+      client.subscribe(in_topic, function (err) {
+        if (err) return done(err);
+        client.end();
       });
+    });
+  });
 
-      client.subscribe({
-        subscriptions: [{topic: in_topic, qos: 1}],
-        messageId: messageId
+  it('should rewrite unsubscribe topic', function (done) {
+    var d = pd(2, done);
+
+    var server = this.server;
+    // rewrite inbound unsubscription
+    server.use('unsubscribe:before', rewriter.rewrite('in'));
+
+    server.on("unsubscribed", function (topic) {
+      t.equal(topic, out_topic);
+      d();
+    });
+
+    s.buildAndConnect(d, server, function (client) {
+      client.unsubscribe(in_topic, function (err) {
+        if (err) return done(err);
+        client.end();
       });
+    });
+  });
+
+  it('should rewrite publish topic', function (done) {
+    var d = pd(2, done);
+
+    var server = this.server;
+    // rewrite inbound publish
+    server.use('publish:before', rewriter.rewrite('in'));
+
+    server.on("published", function (packet) {
+      t.equal(packet.topic, out_topic);
+      d();
+    });
+
+    s.buildAndConnect(d, server, function (client) {
+      client.publish(in_topic, '', function (err) {
+        if (err) return done(err);
+        client.end();
+      });
+    });
+  });
+
+  it('should rewrite forward topic', function (done) {
+    var d = pd(4, done);
+
+    var server = this.server;
+    // rewrite inbound publish
+    server.use('subscribe:before', rewriter.rewrite('in'));
+    server.use('publish:before', rewriter.rewrite('in'));
+    server.use('forward:before', rewriter.rewrite('out'));
+
+    server.on("subscribed", function (topic) {
+      if (topic.indexOf('$SYS') >= 0) return;
+      t.equal(topic, out_topic);
+      d();
+    });
+
+    server.on("published", function (packet) {
+      if (packet.topic.indexOf('$SYS') >= 0) return;
+      t.equal(packet.topic, out_topic);
+      d();
+    });
+
+    async.series([
+      function (callback) {
+        s.buildAndConnect(d, server, function (client) {
+          client.on('message', function (topic, payload) {
+            t.equal(topic, in_topic);
+            t.equal(payload, 'hello');
+            client.end();
+          });
+          client.subscribe(in_topic, function (err) {
+            if (err) return callback(err);
+            callback();
+          });
+        });
+      },
+      function (callback) {
+        s.buildAndConnect(d, server, function (client) {
+          client.publish(in_topic, 'hello', function (err) {
+            if (err) return callback(err);
+            client.end();
+            callback();
+          });
+        });
+      }
+    ], function (err) {
+      if (err) return done();
     });
   });
 });
