@@ -3,12 +3,11 @@
 var async = require('async');
 var t = require('chai').assert;
 var pd = require('plando');
-var mqttoxy = require('../');
-var TopicRewriter = mqttoxy.TopicRewriter;
-var Server = mqttoxy.Server;
+var mqtter = require('../');
+var Server = mqtter.Server;
 var s = require('./support');
 
-var rewriter = new TopicRewriter([
+var rewriter = new mqtter.Rewriter([
   {type: 'in', from: '\$*', to: '\$foo/$1'},
   {type: 'out', from: '\$foo/*', to: '\$$1'}
 ]);

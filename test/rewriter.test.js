@@ -2,7 +2,7 @@
 
 var t = require('chai').assert;
 var pd = require('plando');
-var Rewriter = require('../lib/topic-rewriter');
+var Rewriter = require('../lib/rewriter');
 
 describe('topic-rewriter', function () {
 
