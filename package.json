@@ -16,26 +16,26 @@
   ],
   "dependencies": {
     "debug": "^2.2.0",
-    "lodash": "^3.10.0",
-    "middist": "^0.2.2",
-    "mosca": "^0.31.1",
+    "lodash": "^3.10.1",
+    "middist": "^0.2.3",
+    "mosca": "^0.32.1",
     "path-rewriter": "^0.1.2",
-    "path-to-regexp": "^1.2.0",
+    "path-to-regexp": "^1.2.1",
     "plando": "^0.1.4"
   },
   "devDependencies": {
-    "async": "^1.4.0",
-    "chai": "^3.2.0",
+    "async": "^1.5.0",
+    "chai": "^3.4.1",
     "gulp": "^3.9.0",
     "gulp-exclude-gitignore": "^1.0.0",
-    "gulp-istanbul": "^0.10.0",
-    "gulp-jshint": "^1.11.2",
-    "gulp-mocha": "^2.1.3",
-    "gulp-nsp": "^0.4.5",
+    "gulp-istanbul": "^0.10.3",
+    "gulp-jshint": "^2.0.0",
+    "gulp-mocha": "^2.2.0",
+    "gulp-nsp": "^2.2.1",
     "gulp-plumber": "^1.0.1",
-    "jshint-stylish": "^2.0.1",
-    "mocha": "^2.2.5",
-    "mqtt": "^1.3.5"
+    "jshint-stylish": "^2.1.0",
+    "mocha": "^2.3.4",
+    "mqtt": "^1.6.2"
   },
   "scripts": {
     "test": "gulp"
