@@ -18,13 +18,13 @@
     "debug": "^2.2.0",
     "lodash": "^3.10.1",
     "middist": "^0.2.3",
-    "mosca": "^0.32.1",
-    "path-rewriter": "^0.1.2",
+    "mosca": "taoyuan/mosca",
+    "path-rewriter": "^1.0.1",
     "path-to-regexp": "^1.2.1",
     "plando": "^0.1.4"
   },
   "devDependencies": {
-    "async": "^1.5.0",
+    "async": "^1.5.1",
     "chai": "^3.4.1",
     "gulp": "^3.9.0",
     "gulp-exclude-gitignore": "^1.0.0",
@@ -35,7 +35,7 @@
     "gulp-plumber": "^1.0.1",
     "jshint-stylish": "^2.1.0",
     "mocha": "^2.3.4",
-    "mqtt": "^1.6.2"
+    "mqtt": "^1.6.3"
   },
   "scripts": {
     "test": "gulp"
