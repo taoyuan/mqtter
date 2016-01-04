@@ -1,6 +1,6 @@
 {
   "name": "mqtter",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A middleware-able MQTT broker for node.js based on mosca",
   "homepage": "https://github.com/taoyuan/mqttoxy",
   "repository": "taoyuan/mqttoxy",
