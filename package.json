@@ -1,9 +1,12 @@
 {
   "name": "mqtter",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "A middleware-able MQTT broker for node.js based on mosca",
   "homepage": "https://github.com/taoyuan/mqttoxy",
-  "repository": "taoyuan/mqttoxy",
+  "repository": {
+    "type": "git",
+    "url": "taoyuan/mqttoxy"
+  },
   "author": {
     "name": "Tao Yuan",
     "email": "towyuan@outlook.com",
