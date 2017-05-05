@@ -1,21 +1,21 @@
 'use strict';
 
-var async = require('async');
-var t = require('chai').assert;
-var pd = require('plando');
-var mqtter = require('../');
-var Server = mqtter.Server;
-var s = require('./support');
+const async = require('async');
+const t = require('chai').assert;
+const pd = require('plando');
+const mqtter = require('../');
+const Server = mqtter.Server;
+const s = require('./support');
 
-var rewriter = new mqtter.Rewriter([
+const rewriter = new mqtter.Rewriter([
   {type: 'in', from: '\$*', to: '\$foo/$1'},
   {type: 'out', from: '\$foo/*', to: '\$$1'}
 ]);
 
-var in_topic = '$bar/123';
-var out_topic = '$foo/bar/123';
+const in_topic = '$bar/123';
+const out_topic = '$foo/bar/123';
 
-var moscaSettings = function() {
+const moscaSettings = function () {
   return {
     port: s.nextPort(),
     stats: false,
@@ -31,16 +31,13 @@ describe('middleware/rewrite', function () {
   });
 
   afterEach(function (done) {
-    var that = this;
-    setImmediate(function () {
-      that.server.close(done);
-    });
+    setTimeout(() => this.server.close(done), 100);
   });
 
   it('should rewrite subscribe topic', function (done) {
-    var d = pd(2, done);
+    const d = pd(2, done);
 
-    var server = this.server;
+    const server = this.server;
     // rewrite inbound subscription
     server.use('subscribe:before', rewriter.rewrite('in'));
 
@@ -58,9 +55,9 @@ describe('middleware/rewrite', function () {
   });
 
   it('should rewrite unsubscribe topic', function (done) {
-    var d = pd(2, done);
+    const d = pd(2, done);
 
-    var server = this.server;
+    const server = this.server;
     // rewrite inbound unsubscription
     server.use('unsubscribe:before', rewriter.rewrite('in'));
 
@@ -78,9 +75,9 @@ describe('middleware/rewrite', function () {
   });
 
   it('should rewrite publish topic', function (done) {
-    var d = pd(2, done);
+    const d = pd(2, done);
 
-    var server = this.server;
+    const server = this.server;
     // rewrite inbound publish
     server.use('publish:before', rewriter.rewrite('in'));
 
@@ -98,9 +95,9 @@ describe('middleware/rewrite', function () {
   });
 
   it('should rewrite forward topic', function (done) {
-    var d = pd(4, done);
+    const d = pd(4, done);
 
-    var server = this.server;
+    const server = this.server;
     // rewrite inbound publish
     server.use('subscribe:before', rewriter.rewrite('in'));
     server.use('publish:before', rewriter.rewrite('in'));

@@ -18,30 +18,22 @@
     "proxy"
   ],
   "dependencies": {
-    "debug": "^2.2.0",
-    "lodash": "^4.11.2",
+    "debug": "^2.6.6",
+    "lodash": "^4.17.4",
     "middist": "^0.2.5",
-    "mosca": "^1.3.0",
+    "mosca": "^2.4.0",
     "path-rewriter": "^1.0.1",
-    "path-to-regexp": "^1.2.1",
+    "path-to-regexp": "^1.7.0",
     "plando": "^0.1.4"
   },
   "devDependencies": {
-    "async": "^2.0.0-rc.3",
+    "async": "^2.4.0",
     "chai": "^3.5.0",
-    "gulp": "^3.9.1",
-    "gulp-exclude-gitignore": "^1.0.0",
-    "gulp-istanbul": "^0.10.4",
-    "gulp-jshint": "^2.0.0",
-    "gulp-mocha": "^2.2.0",
-    "gulp-nsp": "^2.4.0",
-    "gulp-plumber": "^1.1.0",
-    "jshint-stylish": "^2.2.0",
-    "mocha": "^2.4.5",
-    "mqtt": "^1.10.0"
+    "mocha": "^3.3.0",
+    "mqtt": "^2.7.1"
   },
   "scripts": {
-    "test": "gulp"
+    "test": "mocha"
   },
   "license": "MIT"
 }
