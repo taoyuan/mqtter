@@ -29,7 +29,7 @@ describe('middleware/rewrite', function () {
   });
 
   afterEach(function (done) {
-    setTimeout(() => this.server.close(done), 100);
+    this.server.close(done);
   });
 
   it('should rewrite subscribe topic', function (done) {
