@@ -1,5 +1,3 @@
-'use strict';
-
 var mqtt = require("mqtt");
 
 var _port = 6890;

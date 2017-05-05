@@ -1,5 +1,3 @@
-'use strict';
-
 const t = require('chai').assert;
 const pd = require('plando');
 const Rewriter = require('../lib/rewriter');

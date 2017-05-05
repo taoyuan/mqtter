@@ -1,5 +1,3 @@
-'use strict';
-
 const async = require('async');
 const t = require('chai').assert;
 const pd = require('plando');
