@@ -7,8 +7,8 @@ describe('topic-rewriter', function () {
   it('should rewrite topic correctly for both in and out bound', function (done) {
     const d = pd(2, done);
     const rewriter = new Rewriter([
-      {type: 'in', from: '\$*', to: '\$foo/$1'},
-      {type: 'out', from: '\$foo/*', to: '\$$1'}
+      {type: 'in', from: '\$(.*)', to: '\$foo/$1'},
+      {type: 'out', from: '\$foo/(.*)', to: '\$$1'}
     ]);
 
     const in_rewrite = rewriter.rewrite('in');

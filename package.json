@@ -18,19 +18,19 @@
     "proxy"
   ],
   "dependencies": {
-    "debug": "^2.6.6",
+    "debug": "^3.1.0",
     "lodash": "^4.17.4",
     "middist": "^0.2.5",
-    "mosca": "^2.4.0",
+    "mosca": "^2.5.2",
     "path-rewriter": "^1.0.1",
-    "path-to-regexp": "^1.7.0",
+    "path-to-regexp": "^2.0.0",
     "plando": "^0.1.4"
   },
   "devDependencies": {
-    "async": "^2.4.0",
-    "chai": "^3.5.0",
-    "mocha": "^3.3.0",
-    "mqtt": "^2.7.1"
+    "async": "^2.5.0",
+    "chai": "^4.1.2",
+    "mocha": "^4.0.1",
+    "mqtt": "^2.13.0"
   },
   "scripts": {
     "test": "mocha"

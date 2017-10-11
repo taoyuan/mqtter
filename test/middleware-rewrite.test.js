@@ -1,13 +1,13 @@
 const async = require('async');
 const t = require('chai').assert;
 const pd = require('plando');
-const mqtter = require('../');
+const mqtter = require('..');
 const Server = mqtter.Server;
 const s = require('./support');
 
 const rewriter = new mqtter.Rewriter([
-  {type: 'in', from: '\$*', to: '\$foo/$1'},
-  {type: 'out', from: '\$foo/*', to: '\$$1'}
+  {type: 'in', from: '$(.*)', to: '\$foo/$1'},
+  {type: 'out', from: '$foo/(.*)', to: '\$$1'}
 ]);
 
 const in_topic = '$bar/123';
